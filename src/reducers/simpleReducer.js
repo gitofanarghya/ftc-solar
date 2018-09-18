@@ -1,5 +1,5 @@
 const initialState = {
-  isloggedin: false,
+  isloggedin: true,
   currentStatus: "site",
   currentZone: null,
   currentRow: null,
