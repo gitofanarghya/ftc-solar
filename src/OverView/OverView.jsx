@@ -1,26 +1,34 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid'
 import classNames from 'classnames';
+import { Typography } from '@material-ui/core';
+import { overViewActions } from '../_actions';
+import { connect } from 'react-redux';
 
-export class OverView extends React.Component {
+
+class OverView extends React.Component {
+
+    componentDidMount() {
+        this.props.getoverView()
+    }
 
     render() {
-        return (
+        return (!this.props.loaded ? "Loading" :
             <Grid container className={classNames("flex", "h100")} justify="center" direction="row" alignItems="stretch">
                 <Grid item xs={2} className="flex">
                     <FTCLogo />
                 </Grid>
                 <Grid item xs={2} className="flex">
-                    <TotalNoOfTrackers />
+                    <TotalNoOfTrackers overView={this.props.overView}/>
                 </Grid>
                 <Grid item xs={2} className="flex">
-                    <OverallUptime />
+                    <OverallUptime overView={this.props.overView}/>
                 </Grid>
                 <Grid item xs={2} className="flex">
-                    <TrackerInfo />
+                    <TrackerInfo overView={this.props.overView}/>
                 </Grid>
                 <Grid item xs={2} className="flex">
-                    <OtherInfo />
+                    <OtherInfo overView={this.props.overView}/>
                 </Grid>
                 <Grid item xs={2} className="flex">
                     <ClientLogo />
@@ -37,32 +45,122 @@ const FTCLogo = () => {
     )
 }
 
-const TotalNoOfTrackers = () => {
+const TotalNoOfTrackers = (props) => {
     return (
-        "TotalNoOfTrackers"
+        <div className={classNames("h100", "w100")}>
+        <Typography align="center" component="div" variant="title" style={{ padding: 8 * 2 }}>
+            Total No Of Trackers
+        </Typography>  
+        <Typography align="center" component="div" variant="title" style={{ padding: 8 }}>
+            {props.overView.totalTrackers}
+        </Typography>
+        </div>  
     )
 }
 
-const OverallUptime = () => {
+const OverallUptime = (props) => {
     return (
-        "OverallUptime"
+        <div className={classNames("h100", "w100")}>
+        <Typography align="center" component="div" variant="title" style={{ padding: 8 }}>
+            Overall Uptime (%)
+        </Typography>
+        <Typography component="div" variant="body2" style={{ padding: 8 }}>
+            <table className={classNames("h100", "w100")}>
+                <tbody>
+                    <tr>
+                        <td>
+                            Today
+                        </td>
+                        <td>
+                            {props.overView.todayUptime}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Yesterday
+                        </td>
+                        <td>
+                            {props.overView.yesterdayUptime}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Since Commisioning
+                        </td>
+                        <td>
+                            {props.overView.sinceCommissioningUptime}
+                        </td>
+                    </tr>
+                </tbody>    
+            </table>
+        </Typography>
+        </div>
     )
 }
 
-const TrackerInfo = () => {
+const TrackerInfo = (props) => {
     return (
-        "TrackerInfo"
+        <div className={classNames("h100", "w100")}>
+        <Typography align="center" component="div" variant="body2" style={{ height: "16.66%" }}>
+            Tracker Model No.
+        </Typography>
+        <Typography align="center" component="div" variant="subheading" style={{ height: "16.66%" }}>
+            {props.overView.trackerModelNo}
+        </Typography>
+        <Typography align="center" component="div" variant="body2" style={{ height: "16.66%" }}>
+            Master Controller Model No.
+        </Typography>
+        <Typography align="center" component="div" variant="subheading" style={{ height: "16.66%" }}>
+            {props.overView.masterControllerModeNo}
+        </Typography>
+        <Typography align="center" component="div" variant="body2" style={{ height: "16.66%" }}>
+            Software Version No.
+        </Typography>
+        <Typography align="center" component="div" variant="subheading" style={{ height: "16.67%" }}>
+            {props.overView.softwareVersionNo}
+        </Typography>
+        </div>
     )
 }
 
-const OtherInfo = () => {
+const OtherInfo = (props) => {
     return (
-        "OtherInfo"
+        <div className={classNames("h100", "w100")}>
+        <Typography align="center" component="div" variant="body2" style={{ height: '25%' }}>
+            Timestamp
+        </Typography>
+        <Typography align="center" component="div" variant="body2" style={{ height: '25%' }}>
+            {props.overView.plantName}, -> {props.overView.locationForMap}
+        </Typography>
+        <Typography align="center" component="div" variant="body2" style={{ height: '25%' }}>
+            {props.overView.clientName}
+        </Typography>
+        <Typography align="center" component="div" variant="body2" style={{ height: '25%' }}>
+            {props.overView.plantCapacity} , {props.overView.CoD}
+        </Typography>
+        </div>
     )
 }
 
 const ClientLogo = () => {
     return (
-        "ClientLogo"
+        <div className="clientlogo"></div>
     )
 }
+
+function mapStateToProps(state) {
+    const { loaded, overView } = state.overView;
+    return {
+        overView,
+        loaded
+    };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getoverView: () => {
+        dispatch(overViewActions.getoverView())
+    }
+})
+
+const connectedOverView = connect(mapStateToProps, mapDispatchToProps)(OverView);
+export { connectedOverView as OverView };

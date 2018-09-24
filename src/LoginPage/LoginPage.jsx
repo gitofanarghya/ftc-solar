@@ -61,10 +61,6 @@ class LoginPage extends React.Component {
         return ( loggingIn ? <Loading /> :
             <NavBar>
             <Grid container className={classNames("App", "flex")} alignItems="center" direction="row" justify="center">
-              <Grid sm={6} item className={classNames("flex", "loginpiccontainer")}>
-                <div className="loginpic">
-                </div>
-              </Grid>
               <Grid sm={3} item className="flex">
               <Card className={classes.card}>
                 <CardMedia

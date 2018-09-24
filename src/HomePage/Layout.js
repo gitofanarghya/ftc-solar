@@ -6,19 +6,24 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 import { OverView } from '../OverView';
+import { MessageConsole } from '../MessageConsole';
+import { Divider } from '@material-ui/core';
 
 const styles = {
   root: {
     flexGrow: 1,
-    height: '100%',
-    backgroundColor: '#EDE9E3'
+    height: '100%'
   },
   AppBar: {
     height: '20%',
-    borderBottom: '0.2px solid black'
+    boxShadow: '0px 0px 20px grey'
   },
   main: {
-    height: '80%'
+    height: '70%'
+  },
+  messageConsole: {
+    height: '10%',
+    boxShadow: '0px 0px 20px grey'
   }
 };
 
@@ -31,6 +36,10 @@ const Nav = (props) => {
         </div>
         <div className={classes.main}>
             {children}
+        </div>
+        <Divider />
+        <div className={classes.messageConsole}>
+          <MessageConsole />
         </div>
     </div>
   );

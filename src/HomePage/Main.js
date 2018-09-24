@@ -18,7 +18,7 @@ const styles = theme => ({
     height: '100%'
   },
   tabcontent: {
-      height: 'calc(100% - 48px)'
+      height: 'calc(100% - 48px)',
   }
 });
 
