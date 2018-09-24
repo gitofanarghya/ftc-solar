@@ -32,6 +32,7 @@ export function authentication(state = initialState, action) {
       return {};
     case userConstants.LOGOUT:
       return {};
+      case 'setzone':
       return { ...state, currentZone: action.payload}
 
       case 'setrow':
@@ -39,3 +40,4 @@ export function authentication(state = initialState, action) {
     default:
       return state
   }
+}
