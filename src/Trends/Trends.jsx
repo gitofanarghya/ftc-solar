@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import classNames from 'classnames'
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,6 +42,12 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         boxShadow: '0px 0px 1px 0px grey'
+    },
+    input: {
+        margin: '20px'
+    },
+    button: {
+        margin: theme.spacing.unit,
     }
   });
 
@@ -74,12 +80,13 @@ class Trends extends React.Component {
             <Grid container className={classNames("flex", "h100")} justify="center" direction="row" alignItems="stretch">
                 <Grid item xs={3} className={classNames("flex", classes.paper)}>
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-multiple-chip">Select trackers:</InputLabel>
+                Select Zone:
                     <Select
+                        className={classes.input}
                         multiple
                         value={this.state.name}
                         onChange={this.handleChange}
-                        input={<Input id="select-multiple-chip" />}
+                        input={<Input id="select-zone" />}
                         renderValue={selected => (
                         <div className={classes.chips}>
                             {selected.map(value => (
@@ -104,13 +111,13 @@ class Trends extends React.Component {
                         </MenuItem>
                         ))}
                     </Select>
-
-                    <InputLabel htmlFor="select-multiple-chip">Select trackers:</InputLabel>
+                    Select Trackers:
                     <Select
+                        className={classes.input}
                         multiple
                         value={this.state.name}
                         onChange={this.handleChange}
-                        input={<Input id="select-multiple-chip" />}
+                        input={<Input id="select-trackers" />}
                         renderValue={selected => (
                         <div className={classes.chips}>
                             {selected.map(value => (
@@ -135,13 +142,13 @@ class Trends extends React.Component {
                         </MenuItem>
                         ))}
                     </Select>
-
-                    <InputLabel htmlFor="select-multiple-chip">Select trackers:</InputLabel>
+                    Select Parameters:
                     <Select
+                        className={classes.input}
                         multiple
                         value={this.state.name}
                         onChange={this.handleChange}
-                        input={<Input id="select-multiple-chip" />}
+                        input={<Input id="select-trackers" />}
                         renderValue={selected => (
                         <div className={classes.chips}>
                             {selected.map(value => (
@@ -166,6 +173,9 @@ class Trends extends React.Component {
                         </MenuItem>
                         ))}
                     </Select>
+                    <Button variant="outlined" component="span" className={classes.button}>
+                        Plot
+                    </Button>
                     </FormControl>    
                 </Grid>
                 <Grid item xs={6} className={classNames("flex", classes.paper)}>
