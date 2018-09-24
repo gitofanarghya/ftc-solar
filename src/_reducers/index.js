@@ -7,7 +7,5 @@ import { overView } from './overView.reducer';
 const rootReducer = combineReducers({
   authentication,
   alert,
-  overView
 });
 
-export default rootReducer;
