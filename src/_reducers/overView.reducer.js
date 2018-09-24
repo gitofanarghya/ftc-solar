@@ -33,6 +33,8 @@ export function overView(state, action) {
         error: action.error,
         loaded: false
       };
+      case 'setrow':
+      return { ...state, currentRow: action.payload}
     default:
       return state
   }
