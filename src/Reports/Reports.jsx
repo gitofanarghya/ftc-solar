@@ -101,7 +101,7 @@ class Reports extends React.Component {
                     style={{ 
                         margin: 'auto'
                     }}>
-                        Daily report e-mail recepients
+                        Daily report e-mail recipients
                     </Typography>
                     <FormControl component="fieldset" className={classes.formControl}>
                     <FormGroup>
